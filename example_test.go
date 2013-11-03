@@ -17,14 +17,14 @@ type IsCat struct {
 func (c *IsCat) Validate(v validate.Validator) validate.Error {
 	// Check to see if the length is longer than allowed.
 	if len(c.data) > c.maxlen {
-		return &validate.Error{
+		return &validate.ValidatorError{
 			Message: errors.New("Not a cat, message too long!"),
 		}
 	}
 
 	// Check to see if the message came from a cat.
 	if c.data != "meow" {
-		return &validate.Error{
+		return &validate.ValidatorError{
 			Message: errors.New("Not a cat, they don't say that!"),
 		}
 	} else {
@@ -57,7 +57,7 @@ func NewIsCat(data string) *IsCat {
 // Show how to define our own custom validation methods.
 func ExampleMethod() {
 	// Get a new BasicValidator
-	v := validate.NewValidator()
+	v := validate.New()
 
 	// We'll loop though these, validating each one.
 	var cats = []string{"woof", "meow", "quack"}

@@ -8,16 +8,15 @@ type Validator interface {
 	Validate(Method) Error // Validate the method and return the error, if any.
 }
 
-// A simple Validator.
-type BasicValidator struct{}
+type validator struct{}
 
-// Returns a new Validator value.
-func NewValidator() *BasicValidator {
-	return &BasicValidator{}
+// Creates a new Validator.
+func New() Validator {
+	return &validator{}
 }
 
 // Validate the given method.
-func (v *BasicValidator) Validate(m Method) (e Error) {
+func (v *validator) Validate(m Method) (e Error) {
 	// Run validation. If we get an error, append it to the error list.
 	return m.Validate(v)
 }

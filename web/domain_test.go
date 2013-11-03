@@ -21,7 +21,7 @@ var invalidCharacters = []domainTest{
 
 // Test for setting maximum number of sub domains.
 func Test_Domain_Validate_InvalidCharacters(t *testing.T) {
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range invalidCharacters {
 		domain := NewDomain(d.Domain)
 		err := v.Validate(domain)
@@ -45,7 +45,7 @@ func Test_Domain_Validate_MaxSubDomains(t *testing.T) {
 	// Append the .x TLD to the list so that we can test for all 127
 	// sub domains and still fit within 255 characters.
 	*TLDs = append(*TLDs, []byte("x"))
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range maxSubDomains {
 		domain := NewDomain(d.Domain).MaxLength(257)
 		err := v.Validate(domain)
@@ -63,7 +63,7 @@ var maxLength = []domainTest{
 
 // Test to make sure domains > 255 characters are invalid.
 func Test_Domain_Validate_MaxLength(t *testing.T) {
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range maxLength {
 		domain := NewDomain(d.Domain)
 		err := v.Validate(domain)
@@ -83,7 +83,7 @@ var maxSubs = []domainTest{
 
 // Test for setting maximum number of sub domains.
 func Test_Domain_Validate_MaxSubs(t *testing.T) {
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range maxSubs {
 		domain := NewDomain(d.Domain).MaxSubdomains(2)
 		err := v.Validate(domain)
@@ -102,7 +102,7 @@ var shorterMaxLength = []domainTest{
 
 // Test for setting custom domain max length.
 func Test_Domain_Validate_ShorterMaxLength(t *testing.T) {
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range shorterMaxLength {
 		domain := NewDomain(d.Domain).MaxLength(5)
 		err := v.Validate(domain)
@@ -122,7 +122,7 @@ var hyphens = []domainTest{
 
 // Ensure labels do not start or end with hyphens.
 func Test_Domain_ValidateHyphens(t *testing.T) {
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range hyphens {
 		domain := NewDomain(d.Domain)
 		err := v.Validate(domain)
@@ -142,7 +142,7 @@ var tlds = []domainTest{
 func Test_Domain_Validate_AddTLD(t *testing.T) {
 	// Append the test123 TLD to the list.
 	*TLDs = append(*TLDs, []byte("test123"))
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range tlds {
 		domain := NewDomain(d.Domain)
 		err := v.Validate(domain)
@@ -159,7 +159,7 @@ var benchErr validate.Error
 
 func benchmarkDomain_Validate(domain string, b *testing.B) {
 	var e validate.Error
-	v := validate.NewValidator()
+	v := validate.New()
 	for i := 0; i < b.N; i++ {
 		d := NewDomain(domain)
 		// Record th result to keep the compiler from eliminating

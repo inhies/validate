@@ -15,7 +15,7 @@ var isPrintTests = []struct {
 }
 
 func Test_IsPrint(t *testing.T) {
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range isPrintTests {
 		data := NewPrintable([]byte(d.Data))
 		err := v.Validate(data)
@@ -29,7 +29,7 @@ func Test_IsPrint(t *testing.T) {
 
 func Benchmark_IsPrint(b *testing.B) {
 	b.StopTimer()
-	v := validate.NewValidator()
+	v := validate.New()
 	for _, d := range isPrintTests {
 		data := NewPrintable([]byte(d.Data))
 		b.StartTimer()
@@ -52,7 +52,7 @@ var isLowerTests = []struct {
 }
 
 func Test_IsLower(t *testing.T) {
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range isLowerTests {
 		data := NewLower([]byte(d.Data))
 		err := v.Validate(data)
@@ -67,7 +67,7 @@ func Test_IsLower(t *testing.T) {
 
 func Benchmark_IsLower(b *testing.B) {
 	b.StopTimer()
-	v := validate.NewValidator()
+	v := validate.New()
 	for _, d := range isLowerTests {
 		data := NewLower([]byte(d.Data))
 		b.StartTimer()
@@ -90,7 +90,7 @@ var isUpperTests = []struct {
 }
 
 func Test_IsUpper(t *testing.T) {
-	v := validate.NewValidator()
+	v := validate.New()
 	for i, d := range isUpperTests {
 		data := NewUpper([]byte(d.Data))
 		err := v.Validate(data)
@@ -104,7 +104,7 @@ func Test_IsUpper(t *testing.T) {
 
 func Benchmark_IsUpper(b *testing.B) {
 	b.StopTimer()
-	v := validate.NewValidator()
+	v := validate.New()
 	for _, d := range isUpperTests {
 		data := NewUpper([]byte(d.Data))
 		b.StartTimer()

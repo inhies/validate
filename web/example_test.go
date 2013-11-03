@@ -8,7 +8,7 @@ import (
 
 func ExampleDomain() {
 	// Setup a new validator
-	v := validate.NewValidator()
+	v := validate.New()
 
 	// Create a new Domain object and return the message on failure
 	goodDomain :=
